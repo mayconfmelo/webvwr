@@ -1,31 +1,43 @@
-#![windows_subsystem = "windows"]
+//#![windows_subsystem = "windows"]
+
+use std::path::PathBuf;
+use std::fs;
+use wry::{
+  application::{
+    event::{Event, StartCause, WindowEvent},
+    event_loop::{ControlFlow, EventLoop},
+    window::WindowBuilder,
+    window::Fullscreen,
+  },
+  webview::WebViewBuilder,
+  webview::WebContext,
+};
 
 fn main() -> wry::Result<()> {
-  use std::path::PathBuf;
-  use wry::{
-    application::{
-      event::{Event, StartCause, WindowEvent},
-      event_loop::{ControlFlow, EventLoop},
-      window::WindowBuilder,
-      window::Fullscreen,
-    },
-    webview::WebViewBuilder,
-    webview::WebContext,
-  };
-
   let event_loop = EventLoop::new();
   let mut context = WebContext::new(Some(PathBuf::from(r".\.webview-data")));
-  
-  let mut js = String::new();
-  js.push_str("document.addEventListener('keydown', (event) => {if (event.key == 'F5') {event.preventDefault()}});");
+
+  let mut js_dir = std::env::current_exe()?;
+  js_dir.pop();
+  js_dir.push("init.js");
+
+  let js;
+  if js_dir.exists() {
+    js = fs::read_to_string(js_dir.clone()).expect("Unable to read file");
+  }
+  else {
+    js = String::from("");
+  }
+
+  println!("{:?}", js_dir);
 
   let window = WindowBuilder::new()
-    .with_title("Microlins Italva")
-    .with_fullscreen(Some(Fullscreen::Borderless(None)))
+    .with_title("Webvwr")
+    //.with_fullscreen(Some(Fullscreen::Borderless(None)))
     .build(&event_loop)?;
 
   let _webview = WebViewBuilder::new(window)?
-    .with_url("https://portaldoaluno.microlins.com.br/")?
+    .with_url("https://google.com/")?
     .with_web_context(&mut context)
     .with_initialization_script(&js)
     .build()?;
