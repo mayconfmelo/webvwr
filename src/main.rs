@@ -7,7 +7,7 @@ use wry::{
     event::{Event, StartCause, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     window::WindowBuilder,
-    window::Fullscreen,
+    //window::Fullscreen,
   },
   webview::WebViewBuilder,
   webview::WebContext,
@@ -15,12 +15,14 @@ use wry::{
 
 fn main() -> wry::Result<()> {
   let event_loop = EventLoop::new();
-  let mut context = WebContext::new(Some(PathBuf::from(r".\.webview-data")));
+  let window = WindowBuilder::new()
+    .with_title("Webvwr")
+    //.with_fullscreen(Some(Fullscreen::Borderless(None)))
+    .build(&event_loop)?;
 
   let mut js_dir = std::env::current_exe()?;
   js_dir.pop();
   js_dir.push("init.js");
-
   let js;
   if js_dir.exists() {
     js = fs::read_to_string(js_dir.clone()).expect("Unable to read file");
@@ -28,14 +30,10 @@ fn main() -> wry::Result<()> {
   else {
     js = String::from("");
   }
-
   println!("{:?}", js_dir);
+  println!("{}", js);
 
-  let window = WindowBuilder::new()
-    .with_title("Webvwr")
-    //.with_fullscreen(Some(Fullscreen::Borderless(None)))
-    .build(&event_loop)?;
-
+  let mut context = WebContext::new(Some(PathBuf::from(r".\.webview-data")));
   let _webview = WebViewBuilder::new(window)?
     .with_url("https://google.com/")?
     .with_web_context(&mut context)
