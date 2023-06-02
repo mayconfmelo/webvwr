@@ -24,7 +24,7 @@ For more informations, run `webvwr --help`.
 
 This program was created as a way to help me learn the Rust language, so while it may work to some extent, it may contain some really unoptimized code.
 
-## Features
+## Features and TODOs
 
 - [X] Open sites in a web viewer
 - [X] JavaScript injection through `./init.js` file
