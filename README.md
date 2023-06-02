@@ -1,6 +1,6 @@
 # Webvwr
 
-<mark style="background-color: yellow">This program is still under early stages of development and is not  functional yet.</mark>
+**This program is still under early stages of development and is not  functional yet.**
 
 Transform your favorite sites into a native-looking web viewer.
 
