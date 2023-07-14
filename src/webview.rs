@@ -10,12 +10,12 @@ use wry::{
     },
 };
 
-pub fn generate_webview(window: Window, url: &str) -> Result<WebView, wry::Error> {
+pub fn generate_webview(window: Window, url: String) -> Result<WebView, wry::Error> {
     let mut context = WebContext::new(Some(PathBuf::from(r".\.webview-data")));
 
     WebViewBuilder::new(window)
         .expect("Could not generate the webview")
-        .with_url(url)
+        .with_url(&url)
         .expect("Could not open URL")
         .with_web_context(&mut context)
         .with_initialization_script(&custom_js::inject())

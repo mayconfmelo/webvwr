@@ -6,7 +6,7 @@ use wry::application::{
     },
 };
 
-pub fn generate_gui(window_title: &str, fullscreen: bool, event_loop: &EventLoop<()>) -> Window {
+pub fn generate_gui(window_title: String, fullscreen: bool, event_loop: &EventLoop<()>) -> Window {
     if fullscreen {
         use wry::application::window::Fullscreen;
 
