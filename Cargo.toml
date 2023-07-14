@@ -5,6 +5,6 @@ edition = "2021"
 
 [dependencies]
 wry = "0.26.0"
+clap = "4.3.0"
 #directories = "5.0"
-#clap = "4.3.0"
 #scraper = "0.17.1"
