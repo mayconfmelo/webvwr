@@ -38,8 +38,8 @@ All JavaScript code inside it will be injected into the site loaded by Webvwr.
 
 - [X] Open sites in a simple web viewer window
 - [X] JavaScript injection
-- [ ] Command line interface
-- [ ] Use site title when `--title` is not provided
+- [X] Command line interface
+- [X] Use site title when `--title` is not provided
 - [ ] Use site favicon when `--icon` is not provided
 - [ ] Install works on Windows
 - [ ] Install works on Linux
