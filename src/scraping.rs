@@ -1,8 +1,7 @@
-
-pub fn get_title(url: String) -> str {
+pub fn get_title(url: &String) -> String {
     use scraper::{Html, Selector};
 
-    let response = reqwest::blocking::get("https://mayconfmelo-test.netlify.app/")
+    let response = reqwest::blocking::get(url)
         .unwrap()
         .text()
         .unwrap();
@@ -10,13 +9,13 @@ pub fn get_title(url: String) -> str {
     let doc = Html::parse_document(&response);
     let title_selector = Selector::parse("head title").unwrap();
     let title = doc.select(&title_selector).next().unwrap();
-
-    title.inner_html().trim()
+    
+    String::from(title.inner_html().trim())
 }
 
-pub fn get_favicon(url: String) {
+/*pub fn get_favicon(url: String) {
     use site_icons::SiteIcons;
-}
+}*/
 
 /*
 fn main() {

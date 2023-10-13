@@ -6,8 +6,8 @@ mod webview;
 mod scraping;
 
 use std::path::PathBuf;
-use std::env;
-use clap::{arg, value_parser, ArgAction, Command, Arg};
+//use std::env;
+use clap::{arg, value_parser, ArgAction, Command};
 use wry::application::{
     event::{Event, StartCause, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
@@ -44,20 +44,25 @@ fn main() -> wry::Result<()> {
         )
         .get_matches();
 
-    let mut window_title = String::from("");
-    if let Some(title) = matches.get_one::<String>("title") {
-        window_title.push_str(title);
-    }
-    else {
-        window_title.push_str("Webvwr");
-    }
-
     let mut url = String::from("");
     if let Some(new_url) = matches.get_one::<String>("URL") {
         url.push_str(new_url)
     }
     else {
-        url.push_str("https://mayconfmelo.netlify.app/")
+        url.push_str("https://google.com/")
+    }
+    
+    let mut window_title = String::from("");
+    if let Some(title) = matches.get_one::<String>("title") {
+        window_title.push_str(title);
+    }
+    else {
+        if matches.get_one::<String>("URL").is_some() {
+            window_title.push_str(&scraping::get_title(&url));
+        }
+        else {
+            window_title.push_str("Webvwr");
+        }
     }
 
     let event_loop = EventLoop::new();
