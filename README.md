@@ -37,9 +37,10 @@ All JavaScript code inside it will be injected into the site loaded by Webvwr.
 ## Features and TODOs
 
 - [X] Open sites in a simple web viewer window
-- [X] Use the `<title>` tag from the first site as window title when no title is provided
 - [X] JavaScript injection
 - [X] Command line interface
+- [X] Open in full screen mode with `--fullscreen` flag
+- [X] Use the `<title>` tag from the first site as window title when no title is provided
 - [X] Use site title when `--title` is not provided
 - [ ] Use site favicon when `--icon` is not provided
 - [ ] Install works on Windows
