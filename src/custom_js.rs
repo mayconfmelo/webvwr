@@ -1,7 +1,7 @@
 use std::fs;
 
 pub fn inject() -> String {
-    let mut js_dir = std::env::current_exe().expect("Could not define current exe path");
+    let mut js_dir = std::env::current_exe().expect("Could not define current program path");
     js_dir.pop();
     js_dir.push("init.js");
 
