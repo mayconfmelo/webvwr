@@ -3,6 +3,7 @@
 mod custom_js;
 mod gui;
 mod webview;
+mod scraping;
 
 use std::path::PathBuf;
 use std::env;
