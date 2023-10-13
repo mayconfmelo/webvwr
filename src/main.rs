@@ -19,23 +19,23 @@ fn main() -> wry::Result<()> {
         .author("Maycon F. Melo")
         .about("Transform your favorite sites into a native-looking web viewer.")
         .arg(
-            arg!([URL] "Defines the url to be used.")
+            arg!([URL] "Defines the web view url.")
                 .action(ArgAction::Set)
         )
         .arg(
-            arg!(-a --add "Add the site as a webview application.")
+            arg!(-a --add "Add an URL as a web view application.")
                 .action(ArgAction::SetTrue)
         )
         .arg(
-            arg!(-r --remove "Remove the site from the webview application list.")
+            arg!(-r --remove "Remove an URL from the web view application list.")
                 .action(ArgAction::SetTrue)
         )
         .arg(
-            arg!(-t --title "Set the webview title.")
+            arg!(-t --title "Set the web view title.")
                 .action(ArgAction::Set)
         )
         .arg(
-            arg!(-i --icon "Set the icon asociated to the webview.")
+            arg!(-i --icon "Set the icon asociated to the web view.")
                 .value_parser(value_parser!(PathBuf))
         )
         .arg(
@@ -66,7 +66,7 @@ fn main() -> wry::Result<()> {
     }
 
     let event_loop = EventLoop::new();
-    let window = gui::generate_gui(window_title, false, &event_loop);
+    let window = gui::generate_gui(window_title, matches.get_flag("fullscreen"), &event_loop);
     
     let _webview = webview::generate_webview(window, url)
         .expect("Could not build the webview");
